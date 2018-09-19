@@ -1,0 +1,28 @@
+jmp start
+i: db 1
+factorial: db 1
+
+extern multiply
+
+start:
+lda i
+mvi b,5
+
+jeq done
+lxi i
+mov b,m
+lxi factorial
+mov c,m
+
+call multiply
+
+mov a,d
+sta factorial
+lda i
+adi 1
+sta i
+jmp start
+
+done:
+lda factorial
+hlt

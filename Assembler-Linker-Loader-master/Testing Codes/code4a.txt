@@ -1,0 +1,9 @@
+jmp start
+extern multiply
+start:
+mvi b,2
+mvi c,3
+call multiply
+mov a,d
+hlt
+

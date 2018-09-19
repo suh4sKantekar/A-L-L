@@ -1,0 +1,17 @@
+jmp start
+
+z: db 3
+y: db 4
+
+extern x
+
+start:
+
+lda z
+
+lxi y
+add m
+
+lxi x
+add m
+hlt

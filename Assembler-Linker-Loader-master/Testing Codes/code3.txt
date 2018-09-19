@@ -1,0 +1,18 @@
+jmp start
+i: db 0
+sum: db 0
+start:
+lda i
+mvi b,6
+jeq done
+lxi sum
+add m
+sta sum
+lda i
+adi 1
+sta i
+jmp start
+done:
+lda sum
+hlt
+

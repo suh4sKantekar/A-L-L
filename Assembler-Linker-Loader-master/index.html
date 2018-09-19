@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
+  <!-- CUSTOM STYLE CONFIG -->
+  <style type="text/css">
+  .card {
+    overflow: auto;
+  }
+  #memory-container {
+    overflow: auto;
+    max-height: 850px;
+  }
+  .codes {
+  	width: 100%;
+  	position: relative;
+  	overflow-x: hidden;
+  	height:300%;
+  }
+  .keyword {
+  	color: green;
+  }
+  .string {
+  	color: purple;
+  }
+  .sc {
+  	color: blue;
+  }
+  #codess{
+  	width: 300%;
+  }
+  #linker{
+  	padding-top: 200px;
+  }
+  .page {
+  	height: 100%;
+  	position: relative;
+  	overflow: hidden;
+  }
+  body,html{
+  	overflow:hidden;
+  	background-color: #2e2738;
+  	color: white;
+  }
+  </style>
+  <!-- END CUSTOM STYLE CONFIG -->
+
+</head>
+
+<body>
+
+	<center><h4>Assembler</h4></center>
+	<br><br>
+	<div class="page">
+		<div class="codes">
+			<div class="row" id="codess">
+				<div class="code 1">
+				<div class="col s1">
+					<div class="input-field col s12">
+						Enter Your Code Here:
+			            <textarea id="highlight1" class="materialize-textarea"></textarea>
+		            </div>
+				</div>
+				<div>
+					
+				</div>
+				<div class="col s1">
+					<div class="col s12 card-panel grey card small" ><span class="card-title">Pass 1 Intermediate Code</span><p id="processfield"></p></div>
+					<div class="col s12 card-panel green card small" ><span class="card-title">Symbol Table</span><p id="symboltable1"></p></div>
+		        </div>
+				<div class="col s1">
+					<div class="row contain">
+						<div class="col s12 card-panel blue card small"><span class="card-title">Global Symbols</span><p id="definedsymbolsone"></p></div>
+						<div class="col s12 card-panel cyan card small"><span class="card-title">External Symbols</span><p id="notdefinedsymbolsone"></p></div>
+					</div>
+				</div>
+				<div class="col s1">
+					<div class="col s12 card-panel grey card small"><span class="card-title">Pass 2 Object Code</span><p id="pass2output"></p></div>
+					<a class="waves-effect waves-light btn black slideleft">Edit Code 2 >></a>
+				</div>
+				</div>
+				<div class="code 2">
+				<div class="col s1">
+					<div class="input-field col s12">
+						Enter Your Code Here:
+			            <textarea id="highlight2" class="materialize-textarea"></textarea>
+			            <a class="waves-effect waves-light btn black slideright"> << Edit Code 1</a>
+
+		            </div>
+				</div>
+				<div>
+					
+				</div>
+				<div class="col s1">
+					<div class="col s12 card-panel grey card small" ><span class="card-title">Pass 1 Intermediate Code</span><p id="processfield2"></p></div>
+					<div class="col s12 card-panel green card small" ><span class="card-title">Symbol Table</span><p id="symboltable2"></p></div>
+		        </div>
+				<div class="col s1">
+					<div class="row contain">
+						<div class="col s12 card-panel blue card small"><span class="card-title">Global Symbols</span><p id="definedsymbolstwo"></p></div>
+						<div class="col s12 card-panel cyan card small"><span class="card-title">External Symbols</span><p id="notdefinedsymbolstwo"></p></div>
+					</div>
+				</div>
+				<div class="col s1">
+					<div class="col s12 card-panel grey card small"><span class="card-title">Pass 2 Object Code</span><p id="pass2output2"></p></div>
+					<a class="waves-effect waves-light btn black slideleft">Edit Code 3 >></a>
+				</div>
+				</div>
+				<div class="code 3">
+				<div class="col s1">
+					<div class="input-field col s12">
+						Enter Your Code Here:
+			            <textarea id="highlight3" class="materialize-textarea"></textarea>
+			            <a class="waves-effect waves-light btn black slideright"> << Edit Code 2</a>
+		            </div>
+				</div>
+				<div>
+					
+				</div>
+				<div class="col s1">
+					<div class="col s12 card-panel grey card small" ><span class="card-title">Pass 1 Intermediate Code</span><p id="processfield3"></p></div>
+					<div class="col s12 card-panel green card small" ><span class="card-title">Symbol Table</span><p id="symboltable3"></p></div>
+		        </div>
+				<div class="col s1">
+					<div class="row contain">
+						<div class="col s12 card-panel blue card small"><span class="card-title">Global Symbols</span><p id="definedsymbolsthree"></p></div>
+						<div class="col s12 card-panel cyan card small"><span class="card-title">External Symbols</span><p id="notdefinedsymbolsthree"></p></div>
+					</div>
+				</div>
+				<div class="col s1">
+					<div class="col s12 card-panel grey card small"><span class="card-title">Pass 2 Object Code</span><p id="pass2output3"></p></div>
+				</div>
+				</div>
+		    </div>
+		</div>
+		<center><a class="waves-effect waves-light btn black slidedown" id="linkdown">Proceed to Linking</a></center>
+		<div id="linker">
+			<center><h4>Linker</h4></center>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div class="row">	
+				<center><a class="waves-effect waves-light btn black slideup" id="editcode">Edit Codes</a></center>
+				<br>
+				<br>
+				<div class="col s6">
+					<div class="card large grey">
+						<span class="card-title">Linked Symbolic Code</span>
+						<p id = "listlink" class="white-text text-darken-6" style="padding: 10px;"></p>
+					</div>
+				</div>
+				<div class="col s6">
+					<div class="card large grey">
+						<span class="card-title">Linked Machine Code</span>
+						<p id = "listlinkmachine" class="white-text text-darken-6" style="padding: 10px;"></p>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<center><a class="waves-effect waves-light btn black slideup" id="gotoload">Proceed to Loading and Simulation</a></center>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>
+		<div id="loader">
+			<center><h4>Loader and Simulator</h4></center>
+			<div class="row">
+				<center>
+					<a id="load" class="waves-effect waves-light btn black">Load</a>
+					<a id="next" onclick="execute();" class="waves-effect waves-light btn disabled black">Step Through</a>
+					<!-- <a id="runfull" onclick="runall();" class="waves-effect waves-light btn disabled">Run Full</a>-->
+				</center>
+				<div id="memory-container" class="col s6">
+
+					<h4>Memory Addresses</h4>
+					<table class="bordered hoverable memory">
+						<thead id="thead">
+						</thead>
+						<tbody id="tbody">	
+						</tbody>
+					</table>
+				</div>
+				<div class="col s6">
+					<h4>Registers</h4>
+					<table class="striped bordered hoverable">								<thead>
+							<tr>
+								<td>A</td>
+								<td id="val-a">Eclair</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>B</td>
+								<td id="val-b"></td>
+								<td>C</td>
+								<td id="val-c"></td>				
+							</tr>
+							<tr>
+								<td>D</td>
+								<td id="val-d"></td>
+								<td>E</td>
+								<td id="val-e"></td>				
+							</tr>
+							<tr>
+								<td>H</td>
+								<td id="val-h"></td>
+								<td>L</td>
+								<td id="val-l"></td>				
+							</tr>
+							<tr>
+								<td>PC</td>
+								<td id="val-pc"></td>
+								<td></td>
+								<td></td>				
+							</tr>
+							<tr>
+								<td>SP</td>
+								<td id="val-sp"></td>
+								<td></td>
+								<td></td>				
+							</tr>
+						</thead>
+					</table>
+					<h4>Stack</h4>
+					<table class="stack striped bordered hoverable" border="1">
+					<thead id="stackhead">
+						<tr></tr>
+					</thead>
+					<tbody id="stackbody">	
+					</tbody>
+					</table>		
+				</div>	
+
+				
+			</div>		
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="alljs/preprocess.js">
+</script>
+<script type="text/javascript" src="alljs/instructions.js">
+</script>
+<script type="text/javascript" src="alljs/re.js">
+</script>
+<script type="text/javascript" src="alljs/assemble.js">
+</script>
+<script type="text/javascript" src="alljs/linker.js">
+</script>
+<script type="text/javascript" src="alljs/loader.js">
+</script>
+<script type="text/javascript" src="alljs/ctable.js">
+</script>
+<script type="text/javascript" src="alljs/handlers.js">
+</script>
+<script type="text/javascript" src="alljs/machinify.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#load').click(function() {
+			loadRam(load(linkedCode));
+    		$('#next').removeClass('disabled');
+    		$('#runfull').removeClass('disabled');
+		});
+	});
+
+</script>
+
+</html>
